@@ -17,7 +17,8 @@ class Question(models.Model):
 
 	#creating a custom method (for admin view)
 	def was_published_in_last_7_days(self):
-		return self.pub_date >= timezone.now() - datetime.timedelta(days=7)
+		now = timezone.now()
+		return timezone.now() - datetime.timedelta(days=7) <= self.pub_date <= now # written this way to avoid questions that are not in the future AND < 7 days old
 
 	# customising method column view
 	was_published_in_last_7_days.admin_order_field = 'pub_date' # defining how to be sorted when clicking on label
