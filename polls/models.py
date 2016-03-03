@@ -4,10 +4,10 @@ from django.db import models
 from django.utils import timezone
 import datetime
 
-# Create your models here.
+
 
 class Question(models.Model):
-	# in django, ID field is automatically added
+	# ID field auto-added
 	question_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published') # name in administration
 
@@ -15,7 +15,7 @@ class Question(models.Model):
 	def __str__(self):
 		return self.question_text
 
-	#creating a custom method (for admin view)
+	#creating a custom method 
 	def was_published_in_last_7_days(self):
 		now = timezone.now()
 		return timezone.now() - datetime.timedelta(days=7) <= self.pub_date <= now # written this way to avoid questions that are not in the future AND < 7 days old

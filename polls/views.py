@@ -16,22 +16,22 @@ class IndexView(generic.ListView):
 		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5] # lte is <=. Filtering out future posts
 
 
-# subclass DetailView as all it does is pull 1 variable or 404
+# subclass DetailView (pull 1 var or 404)
 class DetailView(generic.DetailView):
 	model = Question
 	template_name = 'polls/detail.html'
 
-	# override get_queryset method - (testing)
+	# override get_queryset method
 	def get_queryset(self):
 		return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-# subclass DetailView as all it does is pull 1 variable or 404
+# subclass DetailView 
 class ResultsView(generic.DetailView):
 	model = Question
 	template_name = 'polls/results.html'
 
-	# override get_queryset method - (testing)
+	# override get_queryset method (testing)
 	def get_queryset(self):
 		return Question.objects.filter(pub_date__lte=timezone.now())
 
